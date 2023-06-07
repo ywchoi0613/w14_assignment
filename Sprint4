@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <Windows.h>
+#include <algorithm>
+#include <fstream>
+using namespace std;
+
+class queue {
+public:
+    queue() { NI = 10; NO = 10; capacity = 100; }
+    queue(int a, int b, int c) { NI = a; NO = b; capacity = c; }
+    int NI, NO, capacity;
+	int function() {
+		int itime = 0, ni, no1, no2, k, lost = 0, NofPackets[120];
+		float sum = 0;
+		vector <int> q;
+		ofstream xx("2_out.txt");
+		while (itime++ < 120) {
+			Sleep(10);
+			ni = rand() % NI;
+			no1 = rand() % NO;
+			no2 = rand() % NO;
+
+			if (capacity < q.size() + ni) {
+				lost += q.size() + ni - capacity;
+				ni = capacity - q.size();
+			}
+
+			for (int i = 0; i < ni; i++) {
+				q.push_back(rand() % NI);
+			}
+
+			for (int i = 0; i < no1; i++) {
+				if (q.size() != 0) {
+					q.erase(q.begin());
+				}
+			}
+
+			NofPackets[itime] = q.size();
+			xx << NofPackets[itime] << "\n";
+			sum += NofPackets[itime];
+		}
+		xx.close();
+		cout << "손실:  " << lost << "\n";
+		cout << "평균:  " << sum / 120. << "\n";
+		sort(NofPackets, NofPackets + 120);
+		cout << "최대값:  " << NofPackets[119];
+		return 123;
+	}
+};
+
+void main() {
+	queue a;
+	a = queue(10,20,120);
+	a.function();
+}
