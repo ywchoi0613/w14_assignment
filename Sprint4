@@ -7,9 +7,9 @@ using namespace std;
 
 class queue {
 public:
-    queue() { NI = 10; NO = 10; capacity = 100; }
-    queue(int a, int b, int c) { NI = a; NO = b; capacity = c; }
-    int NI, NO, capacity;
+	queue() { NI = 10; NO = 10; capacity = 100; }
+	queue(int a, int b, int c) { NI = a; NO = b; capacity = c; }
+	int NI, NO, capacity;
 	int function() {
 		int itime = 0, ni, no1, no2, k, lost = 0, NofPackets[120];
 		float sum = 0;
@@ -44,13 +44,19 @@ public:
 		cout << "손실:  " << lost << "\n";
 		cout << "평균:  " << sum / 120. << "\n";
 		sort(NofPackets, NofPackets + 120);
-		cout << "최대값:  " << NofPackets[119];
+		cout << "최대값:  " << NofPackets[119] << "\n";
 		return 123;
 	}
 };
 
 void main() {
-	queue a;
-	a = queue(10,20,120);
+	queue a,b,c,d,e,f;
+	a = queue(10, 30, 120);
 	a.function();
+	cout << endl;
+	b = queue(30, 10, 120);
+	b.function();
+	cout << endl;
+	c = queue(30, 10, 100);
+	c.function();
 }
